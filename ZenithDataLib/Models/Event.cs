@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ZenithDataLib.Models
 {
-    class Event
+    public class Event
     {
         //EventId
         //Event from date and time
@@ -25,9 +25,9 @@ namespace ZenithDataLib.Models
         [Display(Name = "Created by User:")]
         public string EnteredByUsername { get; set; }
 
-        [ForeignKey("ActiveCategory")]
+        [ForeignKey("ActivityCategory")]
         public int ActivityCategoryId { get; set; }
-        public ActiveCategory ActiveCategory { get; set; }
+        public ActivityCategory ActivityCategory { get; set; }
 
         [Display(Name = "Creation Date:")]
         public DateTime CreationDate { get; set; }

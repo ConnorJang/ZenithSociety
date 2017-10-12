@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZenithDataLib.Models
 {
-    class ActiveCategory
+    public class ActivityCategory
     {
         public int ActivityCategoryId { get; set; }
         public string ActivityDescription { get; set; }
