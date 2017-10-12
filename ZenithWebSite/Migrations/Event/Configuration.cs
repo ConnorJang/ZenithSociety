@@ -55,9 +55,33 @@ namespace ZenithWebSite.Migrations.Event
                     userManager.AddToRole(userManager.FindByEmail(user.Email).Id, "Member");
             }
 
+            // Get the ActivityCategories + Events data and save it
+            context.ActivityCategories.AddRange(GetActivityCategories().ToArray());
+            context.Events.AddRange(GetEvents().ToArray());
+            context.SaveChanges();
+            
+
         }
 
-        private List<Event> GetEvent()
+        private List<ActivityCategory> GetActivityCategories()
+        {
+            // ActivityCategoryId
+            // ActivityDescription
+            // CreationDate
+            List<ActivityCategory> categories = new List<ActivityCategory>()
+            {
+                new ActivityCategory()
+                {
+                    ActivityDescription = "Description of this category...",
+                    CreationDate = new DateTime(2017, 9, 17, 10, 30, 0),
+                },
+
+            };
+
+            return categories;
+        }
+
+        private List<Event> GetEvents()
         {
             //EventId
             //Event from date and time
@@ -71,14 +95,13 @@ namespace ZenithWebSite.Migrations.Event
             {
                 new Event()
                 {
-                    EventId = 1,
                     FromDate = new DateTime(2017, 10, 17, 8, 30, 0),
                     ToDate =  new DateTime(2017, 10, 17, 10, 30, 0),
                     EnteredByUsername = "a",
                     ActivityCategoryId = 1,
                     CreationDate = new DateTime(2017, 9, 17, 10, 30, 0),
                     IsActive = true,
-                },
+                }
             };
             return events;
         }
