@@ -18,6 +18,7 @@ namespace ZenithDataLib.Models
         [Required]
         [Display(Name = "Creation Date")]
         [HiddenInput(DisplayValue = true)]
+
         public DateTime CreationDate { get; set; }
     }
 }
