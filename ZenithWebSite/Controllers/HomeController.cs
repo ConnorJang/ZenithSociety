@@ -30,6 +30,7 @@ namespace ZenithWebSite.Controllers
             var events = dbContext.Events
                 .Where(x => x.ToDate.CompareTo(mondayDate) >= 0) // beginning of week
                 .Where(x => x.FromDate.CompareTo(sundayDate) <= 0)
+                .Where(x => x.IsActive)
                 .Include(x => x.ActivityCategory).ToList();
 
             return View(events);
