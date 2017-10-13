@@ -50,8 +50,9 @@ namespace ZenithWebSite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "ActivityCategoryId,ActivityDescription,CreationDate")] ActivityCategory activityCategory)
         {
+            activityCategory.CreationDate = DateTime.Now;
             if (ModelState.IsValid)
-            {
+            { 
                 db.ActivityCategories.Add(activityCategory);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
