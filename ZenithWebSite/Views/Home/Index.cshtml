@@ -1,31 +1,81 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model IEnumerable<ZenithDataLib.Models.Event>
+
+@{
+    ViewBag.Title = "Zenith Society Events";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<style>
+    .events-table th {
+        background-color: #E8EAF6;
+    }
+
+
+    .jumbotron {
+        background: white;
+    }
+</style>
+
+<div class="jumbotron mdl-card mdl-shadow--2dp" style="width: auto">
+    <h1>Zenith Society</h1><br />
+    <p class="lead mdl-color-text--grey" style="font-style: italic;">
+        The Zenity Society is a family-oriented non-for-profit organization that holds events
+        during the week. Check out our upcoming events below!
+    </p>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+<div class="jumbotron mdl-card mdl-shadow--2dp" style="width: auto;">
+    <h1>Events This Week</h1><br />
+    <table class="events-table mdl-data-table mdl-js-data-table  mdl-shadow--2dp">
+        @*<thead>
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric">Date</th>
+                    <th>Event</th>
+                </tr>
+            </thead>*@
+        <tbody>
+            @{
+                System.DateTime lastDate = new DateTime(2000, 01, 01);
+            }
+
+            @foreach (ZenithDataLib.Models.Event item in Model)
+            {
+
+                if (!item.FromDate.Date.Equals(lastDate.Date))
+                {
+                    <tr>
+                        <th colspan="3" style="text-align: center">
+                            @Html.ValueFor(modelItem => item.FromDate, "{0:D}")
+                            @*@Html.Raw(item.FromDate.DayOfWeek + " " + item.FromDate.Month + " " + item.FromDate.Day + ", " + @item.FromDate.Year)*@
+                        </th>
+                    </tr>
+
+                    lastDate = item.FromDate;
+
+                }
+                <tr>
+
+                    <td colspan="2">
+                        @*@Html.Raw(item.FromDate.ToString() + " " + item.ToDate.ToString());*@
+                        @Html.ValueFor(modelItem => item.FromDate, "{0:t}")
+                        -
+                        @Html.ValueFor(modelItem => item.ToDate, "{0:t}")
+
+
+                        @*@Html.DisplayFor(modelItem => item.FromDate.ToShortTimeString())*@
+                        @*@Html.DisplayFor(modelItem => item.ToDate.ToShortTimeString())*@
+                    </td>
+                    <td style="text-align: left">
+                        @*@Html.Raw(item.ActivityCategory.ActivityDescription.ToString());*@
+                        @Html.DisplayFor(modelItem => item.ActivityCategory.ActivityDescription)
+                    </td>
+
+
+                </tr>
+
+            }
+
+    </table>
+
+
+
 </div>
