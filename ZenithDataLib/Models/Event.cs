@@ -21,23 +21,26 @@ namespace ZenithDataLib.Models
 
         public int EventId { get; set; }
 
+        [Required]
         [Display(Name = "Starts")]
         public DateTime FromDate { get; set; }
 
         [Display(Name = "Ends")]
         public DateTime ToDate { get; set; }
 
-        [HiddenInput(DisplayValue = false)]
+        [HiddenInput(DisplayValue = true)]
         [Display(Name = "Created by User:")]
         public string EnteredByUsername { get; set; }
 
-        [Display(Name = "Activity Category")]
+        [UIHint("_ActivityCategoryDropDown")]
         [ForeignKey("ActivityCategory")]
+        [Display(Name = "Activity Category")]
         public int ActivityCategoryId { get; set; }
+        [Display(Name = "Activity Category")]
         public ActivityCategory ActivityCategory { get; set; }
-
-        [Required]
+        
         [Display(Name = "Creation Date:")]
+        [HiddenInput(DisplayValue = true)]
         public DateTime CreationDate { get; set; }
 
         [Display(Name = "Is Active") ]

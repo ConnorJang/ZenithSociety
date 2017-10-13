@@ -29,7 +29,7 @@ namespace ZenithWebSite.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
+            Event @event = db.Events.Include( x => x.ActivityCategory ).SingleOrDefault(x => x.EventId == id);
             if (@event == null)
             {
                 return HttpNotFound();
@@ -49,14 +49,18 @@ namespace ZenithWebSite.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EventId,FromDate,ToDate,EnteredByUsername,ActivityCategoryId,CreationDate,IsActive")] Event @event)
+        public ActionResult Create([Bind(Include = "EventId,FromDate,ToDate,ActivityCategoryId,IsActive,CreationDate,EnteredByUsername")] Event @event)
         {
+            @event.EnteredByUsername = User.Identity.Name;
+            @event.CreationDate = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 db.Events.Add(@event);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
 
             ViewBag.ActivityCategoryId = new SelectList(db.ActivityCategories, "ActivityCategoryId", "ActivityDescription", @event.ActivityCategoryId);
             return View(@event);
