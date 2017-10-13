@@ -15,10 +15,10 @@ namespace ZenithDataLib.Models
         [Required]
         [Display(Name = "Activity Description")]
         public string ActivityDescription { get; set; }
+
         [Required]
         [Display(Name = "Creation Date")]
         [HiddenInput(DisplayValue = true)]
-
         public DateTime CreationDate { get; set; }
     }
 }
