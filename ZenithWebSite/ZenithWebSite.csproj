@@ -197,9 +197,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Event\201710122251062_FirstMigration.cs" />
-    <Compile Include="Migrations\Event\201710122251062_FirstMigration.Designer.cs">
-      <DependentUpon>201710122251062_FirstMigration.cs</DependentUpon>
+    <Compile Include="Migrations\Event\201710150152013_FirstMigration.cs" />
+    <Compile Include="Migrations\Event\201710150152013_FirstMigration.Designer.cs">
+      <DependentUpon>201710150152013_FirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Event\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -297,8 +297,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\Event\201710122251062_FirstMigration.resx">
-      <DependentUpon>201710122251062_FirstMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\Event\201710150152013_FirstMigration.resx">
+      <DependentUpon>201710150152013_FirstMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
