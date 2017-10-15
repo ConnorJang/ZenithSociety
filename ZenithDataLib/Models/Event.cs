@@ -5,10 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace ZenithDataLib.Models
 {
-    class Event
+    public class Event
     {
         //EventId
         //Event from date and time
@@ -19,19 +20,30 @@ namespace ZenithDataLib.Models
         //IsActive
 
         public int EventId { get; set; }
+
+        [Required]
+        [Display(Name = "Starts")]
         public DateTime FromDate { get; set; }
+
+        [Display(Name = "Ends")]
         public DateTime ToDate { get; set; }
 
+        [HiddenInput(DisplayValue = true)]
         [Display(Name = "Created by User:")]
         public string EnteredByUsername { get; set; }
 
-        [ForeignKey("ActiveCategory")]
+        [UIHint("_ActivityCategoryDropDown")]
+        [ForeignKey("ActivityCategory")]
+        [Display(Name = "Activity Category")]
         public int ActivityCategoryId { get; set; }
-        public ActiveCategory ActiveCategory { get; set; }
-
+        [Display(Name = "Activity Category")]
+        public ActivityCategory ActivityCategory { get; set; }
+        
         [Display(Name = "Creation Date:")]
+        [HiddenInput(DisplayValue = true)]
         public DateTime CreationDate { get; set; }
 
+        [Display(Name = "Is Active") ]
         public bool IsActive { get; set; }
     }
 }
