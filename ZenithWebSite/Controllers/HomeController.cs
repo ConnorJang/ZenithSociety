@@ -25,12 +25,13 @@ namespace ZenithWebSite.Controllers
 
 
             DateTime mondayDate = DateTime.Now.AddDays(-dayOffest);
-            DateTime sundayDate = DateTime.Now.AddDays(6 - dayOffest);
+            DateTime sundayDate = mondayDate.AddDays(6);
 
             var events = dbContext.Events
-                .Where(x => x.ToDate.CompareTo(mondayDate) >= 0) // beginning of week
-                .Where(x => x.FromDate.CompareTo(sundayDate) <= 0)
-                .Where(x => x.IsActive)
+                .Where(x => x.ToDate.CompareTo(mondayDate) >= 0 
+                    && x.FromDate.CompareTo(sundayDate) <= 0 
+                    && x.IsActive)
+                .OrderBy(x => x.FromDate)
                 .Include(x => x.ActivityCategory).ToList();
 
             return View(events);
